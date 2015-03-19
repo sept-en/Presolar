@@ -17,6 +17,8 @@ class Dataset:
 	def loadDatasets(filename):
 		"""
 		Load JSON weather data
+
+		param filename: filename...
 		"""
 
 		retVal = []
@@ -33,3 +35,26 @@ class Dataset:
 			retVal = None
 			
 		return retVal
+
+	@staticmethod
+	def saveDatasets(filename, datasets):
+		"""
+		Save datasets
+
+		param filename: filename....
+		param dataset: list of datasets
+		"""
+		with open(filename, "w") as jsonFile:
+			tmp = {
+				"list": []
+			}
+
+			for dataset in datasets:
+				item = {
+					"country": dataset.country,
+					"city": dataset.city,
+					"irradiance": dataset.irradiance
+				}
+				tmp["list"].append(item)
+
+			json.dump(tmp, jsonFile, indent=4, sort_keys=True)

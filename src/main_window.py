@@ -1,9 +1,13 @@
 from PyQt4 import QtGui, QtCore
+import analyzer
 
 
 class MainWindow (QtGui.QWidget):
     def __init__ (self, parent=None):
         super (QtGui.QWidget, self).__init__ (parent)
+
+        # create analyzer
+        self.analyzer = analyzer.Analyzer("../datasets.json")
 
         self.mainGrid = QtGui.QGridLayout ()
         #self.mainGrid.resize (800, 600)

@@ -58,3 +58,7 @@ class Dataset:
 				tmp["list"].append(item)
 
 			json.dump(tmp, jsonFile, indent=4, sort_keys=True)
+
+	@staticmethod
+	def getDataset(datasets, country, city):
+		return list(filter(lambda x: x.country == country and x.city == city, datasets))[0]

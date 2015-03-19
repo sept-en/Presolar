@@ -54,4 +54,7 @@ class MainWindow (QtGui.QWidget):
                 "\nPayback term: " + str (paybackTermMonths) + " months."
         self.userResultBox.setPlainText (resultStr)
 
+    def keyPressEvent (self, e):
+        if e.key() == QtCore.Qt.Key_Return or e.key() == QtCore.Qt.Key_Enter:
+                self.searchButtonClicked (None)
         

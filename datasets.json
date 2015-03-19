@@ -1,14 +1,54 @@
 {
     "list": [
-    {
-        "country": "Ukraine",
-        "city": "Zaporizhia",
-        "irradiance": 1200
-    },
-    {
-        "country": "Ukraine",
-        "city": "Kyiv",
-        "irradiance": 1100
-    }
+        {
+            "country": "Ukraine",
+            "city": "Zaporizhia",
+            "irradiance": 1200
+        },
+        {
+            "country": "Ukraine",
+            "city": "Kyiv",
+            "irradiance": 1100
+        },
+        {
+            "country": "Ukraine",
+            "city": "Kharkiv",
+            "irradiance": 1150
+        },
+        {
+            "country": "Ukraine",
+            "city": "Odessa",
+            "irradiance": 1250
+        },
+        {
+            "country": "Ukraine",
+            "city": "Lutsk",
+            "irradiance": 1050
+        },
+        {
+            "country": "Ukraine",
+            "city": "Mykolaiv",
+            "irradiance": 1050
+        },
+        {
+            "country": "Ukraine",
+            "city": "Zhytomyr",
+            "irradiance": 1050
+        },
+        {
+            "country": "Ukraine",
+            "city": "Kherson",
+            "irradiance": 1050
+        },
+        {
+            "country": "Ukraine",
+            "city": "Vinnytsia",
+            "irradiance": 1050
+        },
+        {
+            "country": "Ukraine",
+            "city": "Rivne",
+            "irradiance": 1050
+        }
     ]
 }

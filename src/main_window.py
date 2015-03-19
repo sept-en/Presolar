@@ -39,4 +39,19 @@ class MainWindow (QtGui.QWidget):
 
 
     def searchButtonClicked (self, e):
-        pass
+        userInputText = self.userInputLine.text()
+        
+        if userInputText == "":
+            self.userResultBox.setText ("Invalid input.")
+            return
+
+        userInputText = str (userInputText).split (' ')
+        country = userInputText[0]
+        city = userInputText[1]
+
+        energyPerHour, paybackTermMonths = self.analyzer.predict (country, city)
+        resultStr = "Energy per hour by panel: " + str (energyPerHour) + \
+                "\nPayback term: " + str (paybackTermMonths) + " months."
+        self.userResultBox.setPlainText (resultStr)
+
+        

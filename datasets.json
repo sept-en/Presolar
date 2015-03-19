@@ -1,0 +1,14 @@
+{
+    "list": [
+    {
+        "country": "Ukraine",
+        "city": "Zaporizhia",
+        "irradiance": 1200
+    },
+    {
+        "country": "Ukraine",
+        "city": "Kyiv",
+        "irradiance": 1100
+    }
+    ]
+}

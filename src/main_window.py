@@ -42,12 +42,16 @@ class MainWindow (QtGui.QWidget):
         userInputPanel = QtGui.QHBoxLayout()
 
         logoLbl = QtGui.QLabel()
-        logoLbl.setPixmap (QtGui.QPixmap ("../presolar_logo.png"))
+        logoLbl.setPixmap (QtGui.QPixmap ("../presolar_logo_left.png"))
         logoLbl.setScaledContents (True)
-        logoLbl.setFixedSize (100, 80)
+        #logoLbl.setFixedSize (100, 80)
+        # font
         fontSlogan = QtGui.QFont ("Railway")
         fontSlogan.setPixelSize (30)
-        slogan = QtGui.QLabel("\"Lux et Veritas\"")
+        # color
+        #slogan = QtGui.QLabel("\"Lux et Veritas\"")
+        slogan = QtGui.QLabel("            ")
+        slogan.setStyleSheet ("QLabel { color: rgb(66, 149, 175); }")
         slogan.setFont (fontSlogan)
         sloganHBox = QtGui.QHBoxLayout()
         sloganHBox.setSpacing (30)

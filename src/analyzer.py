@@ -24,24 +24,24 @@ class Analyzer:
 		param panelCount: [int] number of solar panels
 		param costPerHour: [float] cost per hour
 		"""
-        cityDataset = dataset.Dataset.getDataset(self.datasets, country, city)
-        energyPerYear = Analyzer.getEnergyPerYear(cityDataset.irradiance, pw, areaOfPanel)
-        energyPerHour = energyPerYear / 12 / 30 / 24
-        energyPerHour *= panelCount
+		cityDataset = dataset.Dataset.getDataset(self.datasets, country, city)
+		energyPerYear = Analyzer.getEnergyPerYear(cityDataset.irradiance, pw, areaOfPanel)
+		energyPerHour = energyPerYear / 12 / 30 / 24
+		energyPerHour *= panelCount
 
-        installationCostOfPanel = 15
-        costOfPanel = (panelCost + installationCostOfPanel) * panelCount
-        paybackTermMonths = Analyzer.getPaybackTerm(energyPerHour, costOfPanel, costPerHour)
-        return energyPerHour, paybackTermMonths
+		installationCostOfPanel = 15
+		costOfPanel = (panelCost + installationCostOfPanel) * panelCount
+		paybackTermMonths = Analyzer.getPaybackTerm(energyPerHour, costOfPanel, costPerHour)
+		return energyPerHour, paybackTermMonths
 
 	@staticmethod
 	def getEnergyPerYear(irradiance, pw, area, lossesRatio=0.75):
-        # convert watts to kW
-        pw /= 1000
-            
-        r = pw #/ area
-        energyPerYear = area * r * irradiance * lossesRatio
-        return energyPerYear
+		# convert watts to kW
+		pw /= 1000
+
+		r = pw #/ area
+		energyPerYear = area * r * irradiance * lossesRatio
+		return energyPerYear
 
 	@staticmethod
 	def getPaybackTerm(energyPerHour, costOfPanel, costPerHour):

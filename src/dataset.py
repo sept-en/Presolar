@@ -50,14 +50,18 @@ class Dataset:
 		for dataset in datasets:
 			countries.add(dataset.country)
 
-		return sorted(list(countries))
+		retVal = list(countries)
+		retVal.sort()
+		return retVal
 
 	@staticmethod
 	def getCitiesByCountry(datasets, country):
 		"""
 		Get cities in @country
 		"""
-		return sorted([dataset.city for dataset in datasets if dataset.country == country])
+		retVal = [dataset.city for dataset in datasets if dataset.country == country]
+		retVal.sort()
+		return retVal
 
 	@staticmethod
 	def getDataset(datasets, country, city):

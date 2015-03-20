@@ -41,12 +41,20 @@ class MainWindow (QtGui.QWidget):
 
         # create layout for first line
         userInputPanel = QtGui.QHBoxLayout()
+
         logoLbl = QtGui.QLabel()
         logoLbl.setPixmap (QtGui.QPixmap ("../presolar_logo.png"))
         logoLbl.setScaledContents (True)
-        logoLbl.setFixedSize (30, 30)
-
-        userInputPanel.addWidget (logoLbl)
+        logoLbl.setFixedSize (100, 80)
+        fontSlogan = QtGui.QFont ("Railway")
+        fontSlogan.setPixelSize (30)
+        slogan = QtGui.QLabel("\"Lux et Veritas\"")
+        slogan.setFont (fontSlogan)
+        sloganHBox = QtGui.QHBoxLayout()
+        sloganHBox.setSpacing (30)
+        sloganHBox.addWidget (logoLbl)
+        sloganHBox.addWidget (slogan)
+        #userInputPanel.addWidget (logoLbl)
         userInputPanel.addWidget (self.standardSelectCountry)
         userInputPanel.addWidget (self.standardSelectCity)
         userInputPanel.addWidget (searchButton)
@@ -57,6 +65,7 @@ class MainWindow (QtGui.QWidget):
         basicLayout = QtGui.QHBoxLayout()
         basicLayout.addWidget (self.basicResultBox)
 
+        self.commonTopPanel.addLayout (sloganHBox)
         self.commonTopPanel.addLayout (userInputPanel)
         self.basicAnalysisBox.addLayout (basicLayout)
 

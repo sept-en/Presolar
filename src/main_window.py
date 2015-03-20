@@ -40,6 +40,12 @@ class MainWindow (QtGui.QWidget):
 
         # create layout for first line
         userInputPanel = QtGui.QHBoxLayout()
+        logoLbl = QtGui.QLabel()
+        logoLbl.setPixmap (QtGui.QPixmap ("../presolar_logo.png").scaledToHeight (50))
+        logoLbl.setFixedHeight (30)
+        #logoLbl.setScaledContents (True)
+        #logoLbl.setSizePolicy (QtCore.QSizePolicy.Ignored, QtCore.QSizePolice.Ignored)
+        userInputPanel.addWidget (logoLbl)
         userInputPanel.addWidget (self.standardSelectCountry)
         userInputPanel.addWidget (self.standardSelectCity)
         userInputPanel.addWidget (searchButton)
@@ -120,9 +126,9 @@ class MainWindow (QtGui.QWidget):
                 return
 
         if self.tabWidget.currentIndex == 0:
-            basicTabCalculations()
+            self.basicTabCalculations()
         else:
-            advancedTabCalculations()
+            self.advancedTabCalculations()
 
 
     def basicTabCalculations (self):
@@ -130,14 +136,29 @@ class MainWindow (QtGui.QWidget):
         city = self.standardSelectCity.currentText()
 
         energyPerHour, paybackTermMonths = self.analyzer.predict (country, city)
-        resultStr = "Energy per hour by panel: " + str (energyPerHour) + \
+        resultStr = "Energy per hour by panel (kW/h): " + str ("{:.2f}".format (energyPerHour)) + \
                 "\nPayback term: " + str (paybackTermMonths) + " months."
         self.basicResultBox.setPlainText (resultStr)
+        self.advancedResultBox.clear()
 
 
     def advancedTabCalculations (self):
         country = self.standardSelectCountry.currentText() 
         city = self.standardSelectCity.currentText()
+
+        costOfPanel = int (self.advancedCostOfPanelEdit.text())
+        powerOfPanel = int (self.advancedPowerOfPanelEdit.text())
+        countOfPanels = int (self.advancedCountOfPanelsEdit.text())
+        areaOfPanel = 1
+
+        energyPerHour, paybackTermMonths = self.analyzer.predict (country, city, powerOfPanel,
+                areaOfPanel, costOfPanel, countOfPanels)
+        
+        resultStr = "Energy per hour by panel (kW/h): " + str ("{:.2f}".format (energyPerHour)) + \
+                "\nPayback term: " + str (paybackTermMonths) + " months."
+        self.advancedResultBox.setPlainText (resultStr)
+        self.basicResultBox.clear()
+
 
     def keyPressEvent (self, e):
         if e.key() == QtCore.Qt.Key_Return or e.key() == QtCore.Qt.Key_Enter:

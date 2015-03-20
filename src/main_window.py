@@ -1,6 +1,6 @@
 from PyQt4 import QtGui, QtCore
 import analyzer
-
+import dataset
 
 class MainWindow (QtGui.QWidget):
     def __init__ (self, parent=None):
@@ -21,6 +21,8 @@ class MainWindow (QtGui.QWidget):
         #self.standardSelectCountry.setLineEdit ("Select country")
         #self.standardSelectCity.setLineEdit ("Select city")
         self.standardSelectCity.setEnabled (False)
+        self.standardSelectCountry.addItems (dataset.Dataset.getCountries (self.analyzer.datasets))
+        self.standardSelectCountry.currentIndexChanged.connect (self.countryIndexChanged)
         searchButton = QtGui.QPushButton ("Search")
         searchButton.clicked.connect (self.searchButtonClicked)
 
@@ -43,9 +45,13 @@ class MainWindow (QtGui.QWidget):
 
 
     def searchButtonClicked (self, e):
-        return
-        userInputText = self.userInputLine.text()
-        
+        if (self.standardSelectCountry.currentIndex() < 0 or
+            self.standardSelectCity.currentIndex() < 0):
+                return
+
+        country = self.standardSelectCountry.currentText() 
+        city = self.standardSelectCity.currentText()
+
         energyPerHour, paybackTermMonths = self.analyzer.predict (country, city)
         resultStr = "Energy per hour by panel: " + str (energyPerHour) + \
                 "\nPayback term: " + str (paybackTermMonths) + " months."
@@ -54,4 +60,11 @@ class MainWindow (QtGui.QWidget):
     def keyPressEvent (self, e):
         if e.key() == QtCore.Qt.Key_Return or e.key() == QtCore.Qt.Key_Enter:
                 self.searchButtonClicked (None)
+
+    def countryIndexChanged (self, index):
+        country = self.standardSelectCountry.currentText()
         
+        cities = dataset.Dataset.getCitiesByCountry (self.analyzer.datasets, country)
+        self.standardSelectCity.addItems (cities)
+        self.standardSelectCity.setEnabled (True)
+

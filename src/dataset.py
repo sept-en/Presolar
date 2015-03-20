@@ -43,11 +43,11 @@ class Dataset:
 		for dataset in datasets:
 			countries.add(dataset.country)
 
-		return list(countries)
+		return sorted(list(countries))
 
 	@staticmethod
 	def getCitiesByCountry(datasets, country):
-		return [dataset.city for dataset in datasets if dataset.country == country]
+		return sorted([dataset.city for dataset in datasets if dataset.country == country])
 
 	@staticmethod
 	def getDataset(datasets, country, city):

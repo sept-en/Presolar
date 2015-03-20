@@ -12,7 +12,7 @@ class Analyzer:
 			raise Exception("Invalid datasets file or file is missing.")
 
 	def predict(self, country, city, pw=400, areaOfPanel=1, 
-		panelCost=250, panelCount=10, costPerHour=0.05):
+		panelCost=250, panelCount=10):
 		"""
 		predict
 
@@ -22,7 +22,6 @@ class Analyzer:
 		param areaOfPanel: [int] area.
 		param panelCost: [int] cost of a solar panel
 		param panelCount: [int] number of solar panels
-		param costPerHour: [float] cost per hour
 		"""
 		cityDataset = dataset.Dataset.getDataset(self.datasets, country, city)
 		energyPerYear = Analyzer.getEnergyPerYear(cityDataset.irradiance, pw, areaOfPanel)
@@ -31,7 +30,7 @@ class Analyzer:
 
 		installationCostOfPanel = 15
 		costOfPanel = (panelCost + installationCostOfPanel) * panelCount
-		paybackTermMonths = Analyzer.getPaybackTerm(energyPerHour, costOfPanel, costPerHour)
+		paybackTermMonths = Analyzer.getPaybackTerm(energyPerHour, costOfPanel, cityDataset.powerPrice)
 		return energyPerHour, paybackTermMonths
 
 	@staticmethod

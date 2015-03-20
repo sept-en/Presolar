@@ -29,6 +29,8 @@ class Dataset:
 				datasets = json.load(jsonData)
 				
 				for country in datasets.keys():
+					# currently, power price is in the cents,
+					# convert it to dollars
 					for cityItem in datasets[country]:
 						retValItem = Dataset(country, cityItem["city"], 
 							int(cityItem["irradiance"]), int(cityItem["price"]) / 100)
@@ -40,6 +42,9 @@ class Dataset:
 
 	@staticmethod
 	def getCountries(datasets):
+		"""
+		Get all countries in datasets. TODO: redo comment
+		"""
 		countries = set()
 
 		for dataset in datasets:
@@ -49,8 +54,14 @@ class Dataset:
 
 	@staticmethod
 	def getCitiesByCountry(datasets, country):
+		"""
+		Get cities in @country
+		"""
 		return sorted([dataset.city for dataset in datasets if dataset.country == country])
 
 	@staticmethod
 	def getDataset(datasets, country, city):
+		"""
+		Get dataset with given country and city
+		"""
 		return list(filter(lambda x: x.country == country and x.city == city, datasets))[0]

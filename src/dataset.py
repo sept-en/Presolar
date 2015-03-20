@@ -26,38 +26,28 @@ class Dataset:
 		try:
 			with open(filename) as jsonData:
 				datasets = json.load(jsonData)
-				weatherList = datasets["list"]
-
-				for weatherItem in weatherList:
-					retValItem = Dataset(weatherItem["country"], weatherItem["city"], int(weatherItem["irradiance"]))
-					retVal.append(retValItem)
+				
+				for country in datasets.keys():
+					for cityItem in datasets[country]:
+						retValItem = Dataset(country, cityItem["city"], int(cityItem["irradiance"]))
+						retVal.append(retValItem)
 		except:
 			retVal = None
 			
 		return retVal
 
 	@staticmethod
-	def saveDatasets(filename, datasets):
-		"""
-		Save datasets
+	def getCountries(datasets):
+		countries = set()
 
-		param filename: filename....
-		param dataset: list of datasets
-		"""
-		with open(filename, "w") as jsonFile:
-			tmp = {
-				"list": []
-			}
+		for dataset in datasets:
+			countries.add(dataset.country)
 
-			for dataset in datasets:
-				item = {
-					"country": dataset.country,
-					"city": dataset.city,
-					"irradiance": dataset.irradiance
-				}
-				tmp["list"].append(item)
+		return list(countries)
 
-			json.dump(tmp, jsonFile, indent=4, sort_keys=True)
+	@staticmethod
+	def getCitiesByCountry(datasets, country):
+		return [dataset.city for dataset in datasets if dataset.country == country]
 
 	@staticmethod
 	def getDataset(datasets, country, city):

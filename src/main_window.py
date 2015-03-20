@@ -14,14 +14,18 @@ class MainWindow (QtGui.QWidget):
         
         self.basicAnalysisBox = QtGui.QVBoxLayout()
         
-        # first line : userInput and searchButton
+        # first line : select country,city comboboxes and searchButton
         userFirstLine = QtGui.QHBoxLayout()
-        self.userInputLine = QtGui.QLineEdit()
-        self.userInputLine.resize (200, 50)
+        self.standardSelectCountry = QtGui.QComboBox()
+        self.standardSelectCity = QtGui.QComboBox()
+        #self.standardSelectCountry.setLineEdit ("Select country")
+        #self.standardSelectCity.setLineEdit ("Select city")
+        self.standardSelectCity.setEnabled (False)
         searchButton = QtGui.QPushButton ("Search")
         searchButton.clicked.connect (self.searchButtonClicked)
 
-        userFirstLine.addWidget (self.userInputLine)
+        userFirstLine.addWidget (self.standardSelectCountry)
+        userFirstLine.addWidget (self.standardSelectCity)
         userFirstLine.addWidget (searchButton)
 
         # second line : box with the result of analysis
@@ -34,21 +38,14 @@ class MainWindow (QtGui.QWidget):
         self.basicAnalysisBox.addLayout (userSecondLine)
         
         self.setWindowTitle ("Presolar")
-        self.resize (800, 600)
+        self.setFixedSize (800, 600)
         self.setLayout (self.basicAnalysisBox)
 
 
     def searchButtonClicked (self, e):
+        return
         userInputText = self.userInputLine.text()
         
-        if userInputText == "":
-            self.userResultBox.setText ("Invalid input.")
-            return
-
-        userInputText = str (userInputText).split (' ')
-        country = userInputText[0]
-        city = userInputText[1]
-
         energyPerHour, paybackTermMonths = self.analyzer.predict (country, city)
         resultStr = "Energy per hour by panel: " + str (energyPerHour) + \
                 "\nPayback term: " + str (paybackTermMonths) + " months."

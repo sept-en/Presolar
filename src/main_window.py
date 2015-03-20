@@ -43,10 +43,8 @@ class MainWindow (QtGui.QWidget):
         logoLbl = QtGui.QLabel()
         logoLbl.setPixmap (QtGui.QPixmap ("../presolar_logo.png"))
         logoLbl.setScaledContents (True)
-        logoLbl.setFixedSize (40, 40)
-        logoLbl.setFixedHeight (30)
-        #logoLbl.setScaledContents (True)
-        #logoLbl.setSizePolicy (QtCore.QSizePolicy.Ignored, QtCore.QSizePolice.Ignored)
+        logoLbl.setFixedSize (30, 30)
+
         userInputPanel.addWidget (logoLbl)
         userInputPanel.addWidget (self.standardSelectCountry)
         userInputPanel.addWidget (self.standardSelectCity)

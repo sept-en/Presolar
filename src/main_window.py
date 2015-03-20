@@ -64,11 +64,11 @@ class MainWindow (QtGui.QWidget):
         """
         # Advanced cost of panel textedit and label
         self.advancedCostOfPanelEdit = QtGui.QLineEdit()
-        advancedCostOfPanelLbl = QtGui.QLabel ("&Cost of panel:")
+        advancedCostOfPanelLbl = QtGui.QLabel ("&Cost of panel($):")
         advancedCostOfPanelLbl.setBuddy (self.advancedCostOfPanelEdit)
         # Advanced power of panel and label
         self.advancedPowerOfPanelEdit = QtGui.QLineEdit()
-        advancedPowerOfPanelLbl = QtGui.QLabel ("&Power of panel:")
+        advancedPowerOfPanelLbl = QtGui.QLabel ("&Power of panel(Watts):")
         advancedPowerOfPanelLbl.setBuddy (self.advancedPowerOfPanelEdit)
         # Advanced count of panel textedit and label
         self.advancedCountOfPanelsEdit = QtGui.QLineEdit()

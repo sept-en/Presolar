@@ -19,11 +19,13 @@ def preprocess(filename):
 	with open(output_filename, "w") as output:
 		output_json = {}
 
+		# for every country
 		for country in json_data.keys():
 			output_json[country] = []
 			cities = json_data[country]
 			price = random.randrange(10, 40, 5)
 
+			# for every city in the country
 			for city in cities:
 				random_irradiance = random.randrange(800, 1500)
 				city_item = {
@@ -34,6 +36,7 @@ def preprocess(filename):
 
 				output_json[country].append(city_item)
 
+		# write it to file
 		json.dump(output_json, output, indent=4, sort_keys=True)
 
 

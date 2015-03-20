@@ -41,7 +41,9 @@ class MainWindow (QtGui.QWidget):
         # create layout for first line
         userInputPanel = QtGui.QHBoxLayout()
         logoLbl = QtGui.QLabel()
-        logoLbl.setPixmap (QtGui.QPixmap ("../presolar_logo.png").scaledToHeight (50))
+        logoLbl.setPixmap (QtGui.QPixmap ("../presolar_logo.png"))
+        logoLbl.setScaledContents (True)
+        logoLbl.setFixedSize (40, 40)
         logoLbl.setFixedHeight (30)
         #logoLbl.setScaledContents (True)
         #logoLbl.setSizePolicy (QtCore.QSizePolicy.Ignored, QtCore.QSizePolice.Ignored)
@@ -125,7 +127,7 @@ class MainWindow (QtGui.QWidget):
             self.standardSelectCity.currentIndex() < 0):
                 return
 
-        if self.tabWidget.currentIndex == 0:
+        if self.tabWidget.currentIndex() == 0:
             self.basicTabCalculations()
         else:
             self.advancedTabCalculations()

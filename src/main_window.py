@@ -69,7 +69,15 @@ class MainWindow (QtGui.QWidget):
         basicLayout = QtGui.QHBoxLayout()
         basicLayout.addWidget (self.basicResultBox)
 
+        # kw/ha
+        kwhLbl = QtGui.QLabel("How much $ you spent every month on electricity?")
+        self.energyOrder = QtGui.QLineEdit()
+        kwhLayout = QtGui.QHBoxLayout()
+        kwhLayout.addWidget(kwhLbl)
+        kwhLayout.addWidget(self.energyOrder)
+
         self.commonTopPanel.addLayout (sloganHBox)
+        self.commonTopPanel.addLayout (kwhLayout)
         self.commonTopPanel.addLayout (userInputPanel)
         self.basicAnalysisBox.addLayout (basicLayout)
 
@@ -149,9 +157,14 @@ class MainWindow (QtGui.QWidget):
     def basicTabCalculations (self):
         country = self.standardSelectCountry.currentText() 
         city = self.standardSelectCity.currentText()
+        moneySpent = int (self.energyOrder.text())
 
-        energyPerHour, paybackTermMonths = self.analyzer.predict (country, city)
+        panelsCount = analyzer.Analyzer.getCountOfPanels (country, city, moneySpent)
+        energyPerHour, paybackTermMonths = self.analyzer.predict (country, city, 400, 1, 250, panelsCount)
+        neededMoneyForPanels = panelsCount * (250 + 15)
         resultStr = "Energy per hour by panel (kW/h): " + str ("{:.2f}".format (energyPerHour)) + \
+                "\nRecommended count of panels: " + str(panelsCount) + \
+                "\nNeeded money for panels and installation: " + str(neededMoneyForPanels) + \
                 "\nPayback term: " + utils.getYearsOrMonths (paybackTermMonths) + "."
         self.basicResultBox.setPlainText (resultStr)
         self.advancedResultBox.clear()

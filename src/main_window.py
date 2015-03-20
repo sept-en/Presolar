@@ -1,6 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import analyzer
 import dataset
+import utils
 
 class MainWindow (QtGui.QWidget):
     def __init__ (self, parent=None):
@@ -17,7 +18,7 @@ class MainWindow (QtGui.QWidget):
 
         font = QtGui.QFont()
         font.setPointSize (16)
-        
+
         """
         Basic tab
         """
@@ -138,7 +139,7 @@ class MainWindow (QtGui.QWidget):
 
         energyPerHour, paybackTermMonths = self.analyzer.predict (country, city)
         resultStr = "Energy per hour by panel (kW/h): " + str ("{:.2f}".format (energyPerHour)) + \
-                "\nPayback term: " + str (paybackTermMonths) + " months."
+                "\nPayback term: " + utils.getYearsOrMonths (paybackTermMonths) + "."
         self.basicResultBox.setPlainText (resultStr)
         self.advancedResultBox.clear()
 
@@ -160,7 +161,7 @@ class MainWindow (QtGui.QWidget):
                 areaOfPanel, costOfPanel, countOfPanels)
         
         resultStr = "Energy per hour by panel (kW/h): " + str ("{:.2f}".format (energyPerHour)) + \
-                "\nPayback term: " + str (paybackTermMonths) + " months."
+                "\nPayback term: " + utils.getYearsOrMonths (paybackTermMonths) + "."
         self.advancedResultBox.setPlainText (resultStr)
         self.basicResultBox.clear()
 

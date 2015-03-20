@@ -123,6 +123,7 @@ class MainWindow (QtGui.QWidget):
     def searchButtonClicked (self, e):
         if (self.standardSelectCountry.currentIndex() < 0 or
             self.standardSelectCity.currentIndex() < 0):
+                QtGui.QMessageBox.warning(self, "Warning", "Need a country and city")
                 return
 
         if self.tabWidget.currentIndex() == 0:
@@ -146,9 +147,13 @@ class MainWindow (QtGui.QWidget):
         country = self.standardSelectCountry.currentText() 
         city = self.standardSelectCity.currentText()
 
-        costOfPanel = int (self.advancedCostOfPanelEdit.text())
-        powerOfPanel = int (self.advancedPowerOfPanelEdit.text())
-        countOfPanels = int (self.advancedCountOfPanelsEdit.text())
+        try:
+            costOfPanel = int (self.advancedCostOfPanelEdit.text())
+            powerOfPanel = int (self.advancedPowerOfPanelEdit.text())
+            countOfPanels = int (self.advancedCountOfPanelsEdit.text())
+        except:
+            QtGui.QMessageBox.critical(self, "Epic FAIL :(", "Grats, FATALITY... :|")
+            return
         areaOfPanel = 1
 
         energyPerHour, paybackTermMonths = self.analyzer.predict (country, city, powerOfPanel,

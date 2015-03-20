@@ -8,9 +8,9 @@ class Analyzer:
 		if self.datasets is None:
 			raise Exception("Invalid datasets file or file is missing.")
 
-	def predict(self, country, city, areaOfPanel=1, panelCount=10):
+	def predict(self, country, city, pw=400, areaOfPanel=1, panelCount=10):
             cityDataset = dataset.Dataset.getDataset(self.datasets, country, city)
-            energyPerYear = Analyzer.getEnergyPerYear(cityDataset.irradiance, 400, areaOfPanel)
+            energyPerYear = Analyzer.getEnergyPerYear(cityDataset.irradiance, pw, areaOfPanel)
             energyPerHour = energyPerYear / 12 / 30 / 24
             energyPerHour *= panelCount
 

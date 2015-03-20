@@ -22,12 +22,14 @@ def preprocess(filename):
 		for country in json_data.keys():
 			output_json[country] = []
 			cities = json_data[country]
+			price = random.randrange(10, 40, 5)
 
 			for city in cities:
 				random_irradiance = random.randrange(800, 1500)
 				city_item = {
 					"city": city,
-					"irradiance": random_irradiance
+					"irradiance": random_irradiance,
+					"price": price
 				}
 
 				output_json[country].append(city_item)

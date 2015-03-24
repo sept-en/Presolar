@@ -159,7 +159,7 @@ class MainWindow (QtGui.QWidget):
         city = self.standardSelectCity.currentText()
         moneySpent = int (self.energyOrder.text())
 
-        panelsCount = analyzer.Analyzer.getCountOfPanels (country, city, moneySpent)
+        panelsCount = analyzer.Analyzer.getCountOfPanels (self.analyzer.datasets, country, city, moneySpent)
         energyPerHour, paybackTermMonths = self.analyzer.predict (country, city, 400, 1, 250, panelsCount)
         neededMoneyForPanels = panelsCount * (250 + 15)
         resultStr = "Energy per hour by panel (kW/h): " + str ("{:.2f}".format (energyPerHour)) + \

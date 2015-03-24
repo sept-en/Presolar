@@ -33,6 +33,7 @@ class Analyzer:
 		paybackTermMonths = Analyzer.getPaybackTerm(energyPerHour, costOfPanel, cityDataset.powerPrice)
 		return energyPerHour, paybackTermMonths
 
+
 	@staticmethod
 	def getEnergyPerYear(irradiance, pw, area, lossesRatio=0.75):
 		# convert watts to kW
@@ -41,6 +42,7 @@ class Analyzer:
 		r = pw #/ area
 		energyPerYear = area * r * irradiance * lossesRatio
 		return energyPerYear
+
 
 	@staticmethod
 	def getPaybackTerm(energyPerHour, costOfPanel, costPerHour):
@@ -52,12 +54,12 @@ class Analyzer:
 
 		return monthsCount
 
-	@staticmethod
-        def getCountOfPanels(country, city, money, panelPower=400):
-            cityDataset = dataset.Dataset.getDataset(self.datasets, country, city)
-            kWs = money / cityDataset.powerPrice
-            
-            panelPower /= 1000
-            panelsCount = kWs / panelPower / 30 / 24
-            return panelsCount
 
+	@staticmethod
+	def getCountOfPanels(datasets, country, city, money, panelPower=400):
+		cityDataset = dataset.Dataset.getDataset(datasets, country, city)
+		kWs = money / cityDataset.powerPrice
+
+		panelPower /= 1000
+		panelsCount = kWs / panelPower / 30 / 24
+		return panelsCount
